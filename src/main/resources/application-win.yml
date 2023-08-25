@@ -1,0 +1,45 @@
+server:
+  port: 9902
+  servlet:
+    context-path: /blog
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: ${nacos.address}
+        import-check:
+          enabled: false
+      discovery:
+        server-addr: ${nacos.address}
+        register-enabled: true
+  application:
+    name: blogApp
+  config:
+    import: config.yml
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${datasource.url}
+    username: ${datasource.username}
+    password: ${datasource.password}
+    hikari:
+      max-lifetime: 120000
+  aop:
+    auto: true
+  data:
+    redis:
+      host: ${redis.host}
+      password: ${redis.password}
+      port: ${redis.port}
+  servlet:
+    multipart:
+      max-file-size: 5MB
+      max-request-size: 5MB
+config:
+  upload:
+    path: f:/upload
+    limit: 5000
+  gateway:
+    address: http://127.0.0.1:8999
+logging:
+  level:
+    org.springframework.security: trace
