@@ -44,7 +44,7 @@ public class TimeLineItem {
             this.title_r = last.getTitle();
             this.img_r = last.getCover();
         }
-        this.setGap(RandomUtil.randomInt(30, 150));
+        this.setGap(RandomUtil.randomInt(100, 150));
     }
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");

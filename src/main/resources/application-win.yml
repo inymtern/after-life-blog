@@ -39,7 +39,7 @@ config:
     path: f:/upload
     limit: 5000
   gateway:
-    address: http://127.0.0.1:8999
+    address: ${gateway.address}
 logging:
   level:
     org.springframework.security: trace

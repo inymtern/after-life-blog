@@ -1,12 +1,16 @@
 package com.after.life.blog.controller;
 
 import cn.hutool.core.map.MapBuilder;
+import com.after.life.blog.bean.BlogNote;
 import com.after.life.blog.bean.User;
 import com.after.life.blog.config.UserUtil;
 import com.after.life.blog.dto.LoginDTO;
+import com.after.life.blog.service.BlogNoteService;
 import com.after.life.blog.service.UserService;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import jakarta.annotation.Resource;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +27,7 @@ public class LoginController {
     @Resource
     private UserService userService;
 
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody @Validated LoginDTO loginDTO ) {
         String token = userService.login(loginDTO.getUsername(), loginDTO.getPassword());
@@ -33,11 +38,7 @@ public class LoginController {
                 .build();
         return ResponseEntity.ok(build);
     }
-    @PostMapping("/test")
-    public ResponseEntity<?> test() {
 
-        return ResponseEntity.ok("test is ok");
-    }
 
 
 

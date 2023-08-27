@@ -43,15 +43,16 @@ public class NoteController {
     }
 
     @GetMapping("/index")
-    public ResponseEntity<?> indexList() {
+    public ResponseEntity<?> indexList(@RequestParam(defaultValue = "1") Integer page) {
         List<BlogNote> list = blogNoteService.list(new LambdaQueryWrapper<BlogNote>()
-                              .last("limit 20")
+                              .last("limit " +  (page-1)*10 + ", 10")
                               .select(BlogNote::getId,
                                      BlogNote::getTitle,
                                      BlogNote::getCover,
                                      BlogNote::getIntro,
                                      BlogNote::getCreateTime,
-                                     BlogNote::getTags));
+                                     BlogNote::getTags)
+                              .orderByDesc(BlogNote::getCreateTime));
         List<TimeLineItem> build = TimeLineItem.build(list);
         return ResponseEntity.ok(build);
     }
